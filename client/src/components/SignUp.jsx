@@ -12,12 +12,16 @@ function fakeRequest(payload) {
 
 export default function SignUp() {
   const [username, setUsername] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
 
   // error variables
   const [usernameError, setUsernameError] = useState("");
+  const [firstnameError, setFirstnameError] = useState("");
+  const [lastnameError, setLastnameError] = useState ("");
   const [emailError, setEmailError] = useState("");
   const [phoneError, setPhoneError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -26,6 +30,8 @@ export default function SignUp() {
 
   const clearErrors = () => {
     setUsernameError("");
+    setFirstnameError("");
+    setLastnameError("");
     setEmailError("");
     setPhoneError("");
     setPasswordError("");
@@ -40,6 +46,14 @@ export default function SignUp() {
 
     if (!username.trim()) {
       setUsernameError("Username is required.");
+      ok = false;
+    }
+    if (!firstname.trim()) {
+      setFirstnameError("First name is required.");
+      ok = false;
+    }
+    if (!lastname.trim()) {
+      setLastnameError("Last name is required.");
       ok = false;
     }
     if (!email.trim()) {
@@ -58,8 +72,8 @@ export default function SignUp() {
       ok = false;
     } else {
       const justDigits = digitsOnly(phone);
-      if (justDigits.length < 10 || justDigits.length > 15) {
-        setPhoneError("Enter 10–15 digits only.");
+      if (justDigits.length < 8 || justDigits.length > 15) {
+        setPhoneError("Enter 8–15 digits only.");
         ok = false;
       }
     }
@@ -94,6 +108,8 @@ export default function SignUp() {
       <h2 style={{ margin: 0, marginBottom: 12, fontSize: 22 }}>Sign Up</h2>
 
       <TextField label="Username" name="username" value={username} onChange={(e) => setUsername(e.target.value)} error={usernameError} placeholder="e.g., jay_doe" />
+      <TextField label= "First Name" name="firstname" value={firstname} onChange={(e) => setFirstname(e.target.value)} error={firstnameError} placeholder= "Jay" />
+      <TextField label= "Last Name" name="lastname" value={lastname} onChange={(e) => setLastname(e.target.value)} error={lastnameError} placeholder= "Doe" />
       <TextField label="Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} error={emailError} placeholder="you@example.com" />
       <TextField label="Phone Number" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} error={phoneError} placeholder="Digits only" />
       <TextField label="Password" type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} error={passwordError} placeholder="••••••••" />
