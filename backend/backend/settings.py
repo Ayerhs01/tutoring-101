@@ -91,19 +91,20 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+import os
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
 
-        'NAME': 'railway',
+        'NAME': os.getenv("PGDATABASE", "postgres"),
 
-        'USER': 'postgres',
+        'USER': os.getenv("PGUSER", "postgres"),
 
-        'PASSWORD': 'FeJTHpVlJJGyuLEHchpwsjVOPmIZaYSh',
+        'PASSWORD': os.getenv("PGPASSWORD", ""),
 
-        'HOST': 'shortline.proxy.rlwy.net',
+        'HOST':  os.getenv("PGHOST", "localhost"),
 
-        'PORT': '11787',
+        'PORT': os.getenv("PGPORT", "5432"),
     }
 }
 
